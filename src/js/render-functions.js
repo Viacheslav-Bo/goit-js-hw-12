@@ -1,6 +1,45 @@
-// У файлі render-functions.js створи екземпляр SimpleLightbox для роботи з модальним вікном та зберігай функції для відображення елементів інтерфейсу:
+const loader = document.querySelector('.loader');
+const gallery = document.querySelector('.gallery');
+// ===========================================================
+// РЕНДЕР
+export function createGallery(images) {
+  return images
+    .map(function (img) {
+      const {
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      } = img;
+      return `<li class="gallery-item">
+            <div class="gallery-img-container">
+            <a class="gallery-link" href="${largeImageURL}">
+              <img class="image" src="${webformatURL}" alt="${tags}" data-source="${largeImageURL}"  /></a>
+            </div>
+            <div class="desc-container">
+              <ul class="desc-list">
+              <li class="Likes">Likes: <span>${likes}</span></li>
+              <li class="Views">Views: <span>${views}</span></li>
+              <li class="Comments">Comments: <span>${comments}</span></li>
+              <li class="Downloads">Downloads: <span>${downloads}</span></li>
+              </ul>
+            </div>
+          </li>`;
+    })
+    .join('');
+}
 
-// createGallery(images). Ця функція повинна приймати масив images, створювати HTML-розмітку для галереї, додавати її в контейнер галереї та викликати метод екземпляра SimpleLightbox refresh(). Нічого не повертає.
-// clearGallery(). Ця функція нічого не приймає та повинна очищати вміст контейнера галереї. Нічого не повертає.
-// showLoader(). Ця функція нічого не приймає, повинна додавати клас для відображення лоадера. Нічого не повертає.
-// hideLoader(). Ця функція нічого не приймає, повинна прибирати клас для відображення лоадера. Нічого не повертає.
+export function clearGallery() {
+  gallery.innerHTML = '';
+}
+
+export function showLoader() {
+  loader.classList.add('is-shown');
+}
+
+export function hideLoader() {
+  loader.classList.remove('is-shown');
+}
