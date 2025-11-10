@@ -6,16 +6,16 @@ import{a as f,S as h,i as c}from"./assets/vendor-Cq7ZUixy.js";(function(){const 
             <div class="desc-container">
               <ul class="desc-list">
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="./img/symbol-defs.svg#icon-like"></use>
+            <use href="/img/symbol-defs.svg#icon-like"></use>
           </svg><span>${t}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="./img/symbol-defs.svg#icon-views"></use>
+            <use href="/img/symbol-defs.svg#icon-views"></use>
           </svg><span>${n}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="./img/symbol-defs.svg#icon-comments"></use>
+            <use href="/img/symbol-defs.svg#icon-comments"></use>
           </svg><span>${g}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="./img/symbol-defs.svg#icon-downloads"></use>
+            <use href="/img/symbol-defs.svg#icon-downloads"></use>
           </svg><span>${m}</span></li>
               </ul>
             </div>
