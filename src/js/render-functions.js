@@ -1,7 +1,15 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const loader = document.querySelector('.loader');
 const gallery = document.querySelector('.gallery');
+
+let lightbox = new SimpleLightbox('.gallery-link', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 // ===========================================================
-// РЕНДЕР
+// СТВОРЕННЯ РОЗМІТКИ
 export function createGallery(images) {
   return images
     .map(function (img) {
@@ -31,7 +39,26 @@ export function createGallery(images) {
     })
     .join('');
 }
+// ===========================================================
+// ВТАВКА РОЗМІТКИ В DOM
+export function makeMarkup(res) {
+  if (res.length === 0) {
+    iziToast.show({
+      message:
+        'Sorry, there are no images matching your search query. Please try again!',
+      position: 'topRight',
+      backgroundColor: 'rgb(255, 215, 163)',
+    });
+    return;
+  }
 
+  const markup = createGallery(res);
+  gallery.insertAdjacentHTML('afterbegin', markup);
+  hideLoader();
+  lightbox.refresh();
+}
+// ===========================================================
+// ДОДАТКОВІ ФУНКЦІЇ
 export function clearGallery() {
   gallery.innerHTML = '';
 }
