@@ -33,16 +33,16 @@ export function createGallery(images) {
             <div class="desc-container">
               <ul class="desc-list">
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="/img/symbol-defs.svg#icon-like"></use>
+            <use href="/symbol-defs.svg#icon-like"></use>
           </svg><span>${likes}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="/img/symbol-defs.svg#icon-views"></use>
+            <use href="/symbol-defs.svg#icon-views"></use>
           </svg><span>${views}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="/img/symbol-defs.svg#icon-comments"></use>
+            <use href="/symbol-defs.svg#icon-comments"></use>
           </svg><span>${comments}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="/img/symbol-defs.svg#icon-downloads"></use>
+            <use href="/symbol-defs.svg#icon-downloads"></use>
           </svg><span>${downloads}</span></li>
               </ul>
             </div>
