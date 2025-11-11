@@ -4,7 +4,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-import spriteUrl from '../img/icons.svg?url';
+import spriteUrl from '../img/icons.svg';
 
 const loader = document.querySelector('.loader');
 const gallery = document.querySelector('.gallery');
