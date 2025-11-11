@@ -6,16 +6,16 @@ import{a as g,S as f,i as h}from"./assets/vendor-MgecxatS.js";(function(){const 
             <div class="desc-container">
               <ul class="desc-list">
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="/symbol-defs.svg#icon-like"></use>
+            <use href="/public/symbol-defs.svg#icon-like"></use>
           </svg><span>${t}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="/symbol-defs.svg#icon-views"></use>
+            <use href="/public/symbol-defs.svg#icon-views"></use>
           </svg><span>${n}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
             <use href="/symbol-defs.svg#icon-comments"></use>
           </svg><span>${d}</span></li>
               <li class="icons"><svg class="icon" width="24" height="24">
-            <use href="/symbol-defs.svg#icon-downloads"></use>
+            <use href="./public/symbol-defs.svg#icon-downloads"></use>
           </svg><span>${m}</span></li>
               </ul>
             </div>
