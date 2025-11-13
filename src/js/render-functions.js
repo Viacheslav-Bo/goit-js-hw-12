@@ -9,10 +9,13 @@ import sprite from '../img/icons.svg';
 const loader = document.querySelector('.loader');
 const gallery = document.querySelector('.gallery');
 
+// ===========================================================
+// БІБЛІОТЕКА lightbox
 let lightbox = new SimpleLightbox('.gallery-link', {
   captionsData: 'alt',
   captionDelay: 250,
 });
+
 // ===========================================================
 // СТВОРЕННЯ РОЗМІТКИ
 export function createGallery(images) {
@@ -83,3 +86,7 @@ export function showLoader() {
 export function hideLoader() {
   loader.classList.remove('is-shown');
 }
+
+export function showLoadMoreButton() {}
+
+export function hideLoadMoreButton() {}

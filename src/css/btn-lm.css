@@ -1,0 +1,21 @@
+.load-more {
+    padding: 8px 38px;
+    font-size: 16px;
+    margin: 30px auto 50px auto;
+    display: block;
+    border: none;
+    border-radius: 4px;
+    background-color: #4E75FF;
+    color: white;
+    cursor: pointer;
+}
+
+.load-more:hover,
+.load-more:focus {
+    background-color: #4763c8;
+}
+
+.load-more:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
