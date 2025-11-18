@@ -20,8 +20,12 @@ const input = document.querySelector('input[name="search-text"]');
 const btnLoadMore = document.querySelector('.js-load-more');
 
 let userLookingFor = [];
-let currentPage = 1;
+let page = 1;
 const perPage = 15;
+
+const gallery = document.querySelector('.gallery');
+let searchWord;
+
 submitBtn.disabled = true;
 
 // ===================================================================
@@ -32,23 +36,30 @@ input.addEventListener('input', evt => {
 // ===================================================================
 // ===================================================================
 // ПОДІЯ CLICK LOADMORE
-// btnLoadMore.addEventListener('click', evt => {
-//   currentPage++;
-// });
+
+btnLoadMore.addEventListener('click', async evt => {
+  page += 1;
+
+  const res = await getImagesByQuery(searchWord, page);
+  const markup = createGallery(res.hits);
+  gallery.insertAdjacentHTML('beforeend', markup);
+});
+
 // ===================================================================
 // ПОДІЯ сабміт
 form.addEventListener('submit', async evt => {
   try {
+    page = 1;
     evt.preventDefault();
     hideLoadMoreButton();
     clearGallery();
 
-    const searchWord = document
+    searchWord = document
       .querySelector('input[name="search-text"]')
       .value.trim();
 
-    userLookingFor.push(searchWord);
-    console.log(userLookingFor);
+    // userLookingFor.push(searchWord);
+    // console.log(userLookingFor);
 
     if (!searchWord) {
       return;
@@ -56,12 +67,16 @@ form.addEventListener('submit', async evt => {
 
     showLoader();
 
-    const res = await getImagesByQuery(searchWord, currentPage);
+    const res = await getImagesByQuery(searchWord, page);
+    console.log('res', res, page);
 
     makeMarkup(res.hits);
-    hideLoader();
 
-    if (res.hits.length > perPage) {
+    hideLoader();
+    // const total_pages = Math.ceil(res.totalHits / perPage);
+    // console.log(total_pages);
+
+    if (res.totalHits > perPage) {
       showLoadMoreButton();
     } else if (res.hits.length < perPage && res.hits.length !== 0) {
       hideLoadMoreButton();

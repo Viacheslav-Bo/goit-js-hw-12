@@ -71,7 +71,7 @@ export function makeMarkup(res) {
 
   const markup = createGallery(res);
 
-  gallery.insertAdjacentHTML('afterbegin', markup);
+  gallery.insertAdjacentHTML('beforeend', markup);
 
   lightbox.refresh();
 }
