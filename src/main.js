@@ -6,14 +6,22 @@ import {
   showLoadMoreButton,
   hideLoadMoreButton,
   makeMarkup,
+  createGallery,
 } from './js/render-functions.js';
+
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 // ===================================================================
 // БАЗА
 const form = document.querySelector('.form');
 const submitBtn = document.querySelector('button[type=submit]');
 const input = document.querySelector('input[name="search-text"]');
+const btnLoadMore = document.querySelector('.js-load-more');
 
+let userLookingFor = [];
+let currentPage = 1;
+const perPage = 15;
 submitBtn.disabled = true;
 
 // ===================================================================
@@ -22,33 +30,61 @@ input.addEventListener('input', evt => {
   submitBtn.disabled = evt.target.value.trim() === '';
 });
 // ===================================================================
+// ===================================================================
+// ПОДІЯ CLICK LOADMORE
+// btnLoadMore.addEventListener('click', evt => {
+//   currentPage++;
+// });
+// ===================================================================
 // ПОДІЯ сабміт
-form.addEventListener('submit', evt => {
-  evt.preventDefault();
-  showLoader();
+form.addEventListener('submit', async evt => {
+  try {
+    evt.preventDefault();
+    hideLoadMoreButton();
+    clearGallery();
 
-  const searchWord = document
-    .querySelector('input[name="search-text"]')
-    .value.trim();
-  if (!searchWord) {
-    return;
+    const searchWord = document
+      .querySelector('input[name="search-text"]')
+      .value.trim();
+
+    userLookingFor.push(searchWord);
+    console.log(userLookingFor);
+
+    if (!searchWord) {
+      return;
+    }
+
+    showLoader();
+
+    const res = await getImagesByQuery(searchWord, currentPage);
+
+    makeMarkup(res.hits);
+    hideLoader();
+
+    if (res.hits.length > perPage) {
+      showLoadMoreButton();
+    } else if (res.hits.length < perPage && res.hits.length !== 0) {
+      hideLoadMoreButton();
+      iziToast.show({
+        message: `We're sorry, but you've reached the end of search results. Total images found: ${res.totalHits}.`,
+        position: 'topRight',
+        backgroundColor: 'rgb(255, 215, 163)',
+      });
+    }
+
+    form.reset();
+    submitBtn.disabled = true;
+  } catch (error) {
+    console.log(error);
   }
-
-  clearGallery();
-
-  getImagesByQuery(searchWord)
-    .then(makeMarkup)
-    .catch(error => console.log(error));
-  form.reset();
-  submitBtn.disabled = true;
 });
 
+// =====================ЗРОБЛНО===========================
 // при сабміті форми тобі необхідно зберігати те, що ввів користувач у глобальну змінну.
 // Поки в галерії нема зображень, кнопка повинна бути прихована.
 // Після того як у галереї з'являються зображення, кнопка з'являється в інтерфейсі під галереєю.
 // При повторному сабміті форми кнопка спочатку ховається, а після отримання результатів
 // запиту знову відображається за потреби.
-// Перенеси індикатор завантаження під кнопку завантаження додаткових зображень.
 
 // У відповіді бекенд повертає властивість totalHits — загальна кількість зображень,
 // які відповідають критерію пошуку (для безкоштовного акаунту). Якщо користувач дійшов
@@ -57,11 +93,16 @@ form.addEventListener('submit', evt => {
 
 // Зверни увагу, що кінець колекції може бути і на 1й сторінці, і на подальших.
 
-// Після додавання нових елементів до списку зображень на екземплярі SimpleLightbox викликається
-// метод refresh()
 // Коли користувач отримує результати за максимально можливою сторінкою для конкретного пошукового
 // слова, тобто вже немає чого підвантажувати, кнопка Load more зникає і з’являється відповідне
 // повідомлення
+
+// =====================В ПРОЦЕСІ===========================
+// Перенеси індикатор завантаження під кнопку завантаження додаткових зображень.
+
+// Після додавання нових елементів до списку зображень на екземплярі SimpleLightbox викликається
+// метод refresh()
+
 // При кожному новому сабміті форми номер сторінки скидається до дефолтного 1 і результати
 // попередніх запитів зникають
 

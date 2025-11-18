@@ -8,6 +8,7 @@ import sprite from '../img/icons.svg';
 
 const loader = document.querySelector('.loader');
 const gallery = document.querySelector('.gallery');
+const btnLoadMore = document.querySelector('.js-load-more');
 
 // ===========================================================
 // БІБЛІОТЕКА lightbox
@@ -69,8 +70,9 @@ export function makeMarkup(res) {
   }
 
   const markup = createGallery(res);
+
   gallery.insertAdjacentHTML('afterbegin', markup);
-  hideLoader();
+
   lightbox.refresh();
 }
 // ===========================================================
@@ -87,6 +89,10 @@ export function hideLoader() {
   loader.classList.remove('is-shown');
 }
 
-export function showLoadMoreButton() {}
+export function showLoadMoreButton() {
+  btnLoadMore.classList.add('btn-is-shown');
+}
 
-export function hideLoadMoreButton() {}
+export function hideLoadMoreButton() {
+  btnLoadMore.classList.remove('btn-is-shown');
+}

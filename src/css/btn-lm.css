@@ -1,4 +1,11 @@
-.load-more {
+.js-load-more {
+    display: none;
+}
+
+
+
+.btn-is-shown {
+    display: block;
     padding: 8px 38px;
     font-size: 16px;
     margin: 30px auto 50px auto;
@@ -10,12 +17,12 @@
     cursor: pointer;
 }
 
-.load-more:hover,
-.load-more:focus {
+.js-load-more:hover,
+.js-load-more:focus {
     background-color: #4763c8;
 }
 
-.load-more:disabled {
+.js-load-more:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
 }
