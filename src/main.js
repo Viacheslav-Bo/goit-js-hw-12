@@ -6,7 +6,6 @@ import {
   showLoadMoreButton,
   hideLoadMoreButton,
   makeMarkup,
-  scroll,
 } from './js/render-functions.js';
 
 import iziToast from 'izitoast';
@@ -32,6 +31,25 @@ submitBtn.disabled = true;
 input.addEventListener('input', evt => {
   submitBtn.disabled = evt.target.value.trim() === '';
 });
+// ===================================================================
+// СКРОЛ
+function scroll() {
+  const lastItem = document.querySelector('.gallery .gallery-item:last-child');
+  if (!lastItem) return;
+  window.scrollBy({
+    top: lastItem.getBoundingClientRect().height * 2,
+    behavior: 'smooth',
+  });
+}
+// ===================================================================
+// ФУНКЦІЯ IZITOAST
+function notification(message) {
+  iziToast.show({
+    message: message,
+    position: 'topRight',
+    backgroundColor: 'rgb(255, 215, 163)',
+  });
+}
 
 // ===================================================================
 // ПОДІЯ CLICK LOADMORE
@@ -48,12 +66,11 @@ btnLoadMore.addEventListener('click', async evt => {
 
     if (page >= total_pages) {
       hideLoadMoreButton();
-      iziToast.show({
-        message: `We're sorry, but you've reached the end of search results. Total images found: ${res.totalHits}.`,
-        position: 'topRight',
-        backgroundColor: 'rgb(255, 215, 163)',
-      });
+      notification(
+        `We're sorry, but you've reached the end of search results. Total images found: ${res.totalHits}.`
+      );
     }
+
     scroll();
   } catch (error) {
     console.log('error', error);
@@ -89,17 +106,16 @@ form.addEventListener('submit', async evt => {
       showLoadMoreButton();
     } else if (res.hits.length < perPage && res.hits.length !== 0) {
       hideLoadMoreButton();
-      iziToast.show({
-        message: `We're sorry, but you've reached the end of search results. Total images found: ${res.totalHits}.`,
-        position: 'topRight',
-        backgroundColor: 'rgb(255, 215, 163)',
-      });
+      notification(
+        `We're sorry, but you've reached the end of search results. Total images found: ${res.totalHits}.`
+      );
     }
 
     form.reset();
     submitBtn.disabled = true;
   } catch (error) {
     console.log(error);
+    notification(`Oops! Something went wrong. Please try again later.`);
   } finally {
     hideLoader();
   }

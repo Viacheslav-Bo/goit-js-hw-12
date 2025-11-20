@@ -95,10 +95,3 @@ export function showLoadMoreButton() {
 export function hideLoadMoreButton() {
   btnLoadMore.classList.remove('btn-is-shown');
 }
-
-export function scroll() {
-  window.scrollBy({
-    top: gallery.firstChild.getBoundingClientRect().height * 2,
-    behavior: 'smooth',
-  });
-}
