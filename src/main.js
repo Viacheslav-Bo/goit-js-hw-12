@@ -44,7 +44,7 @@ btnLoadMore.addEventListener('click', async evt => {
     total_pages = Math.ceil(res.totalHits / perPage);
     btnLoadMore.textContent = `Page: ${page} of ${total_pages}`;
 
-    makeMarkup(res.hits);
+    makeMarkup(res);
 
     if (page >= total_pages) {
       hideLoadMoreButton();
@@ -83,7 +83,7 @@ form.addEventListener('submit', async evt => {
 
     const res = await getImagesByQuery(searchWord, page);
 
-    makeMarkup(res.hits);
+    makeMarkup(res);
 
     if (res.totalHits > perPage) {
       showLoadMoreButton();
