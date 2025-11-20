@@ -59,7 +59,7 @@ export function createGallery(images) {
 // ===========================================================
 // ВТАВКА РОЗМІТКИ В DOM
 export function makeMarkup(res) {
-  if (res.length === 0) {
+  if (!res.length) {
     iziToast.show({
       message:
         'Sorry, there are no images matching your search query. Please try again!',
